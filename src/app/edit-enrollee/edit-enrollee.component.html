@@ -1,0 +1,47 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner"> 
+    <span class="task-left">Angular Task</span> 
+    <div class="spacer"></div>
+    <span class="task"><a (click)="logout()">Logout</a></span>
+  </div>
+<div class="content" role="main">
+    <div class="container">  
+        <div class="alert alert-success" role="alert" *ngIf="displaySuccess">
+            Enrollee details updated successfully...redirecting to list of Enrollees...
+          </div>
+          <h1 class="text-center">Edit Enrollee</h1>
+          <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="exampleInputEmail1">ID</label>
+                <input type="text" class="form-control" id="exampleInputEmail1"  formControlName="id" autocomplete="off" >          
+              </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Name</label>
+              <input type="text" class="form-control" id="exampleInputEmail1"  placeholder="Enter name" formControlName="name" autocomplete="off">          
+            </div>
+            <div *ngIf="editForm.controls['name'].invalid && (editForm.controls['name'].dirty || editForm.controls['name'].touched)" class="alert alert-danger">
+              <div *ngIf="editForm.controls['name'].errors.required">
+              User Name is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Date Of Birth</label>
+            <input type="text" class="form-control" id="exampleInputEmail1"  formControlName="DOB" autocomplete="off" >          
+          </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Activation Status</label>              
+              <select class="form-control" id="exampleInputPassword1" formControlName="activationStatus">
+                <option value="" disabled>Select</option>
+                <option *ngFor="let status of statuses" [ngValue]="status">{{status}}</option>
+              </select>
+            </div>
+            <div *ngIf="editForm.controls['activationStatus'].invalid && (editForm.controls['activationStatus'].dirty || editForm.controls['activationStatus'].touched)" class="alert alert-danger">
+              <div *ngIf="editForm.controls['activationStatus'].errors.required">
+                Activation Status is required.
+            </div>
+          </div>
+            <button type="submit" class="btn btn-primary edit" [disabled]="!editForm.valid">Update</button>
+            <button type="button" class="btn btn-primary back" (click)="back()">Back</button>
+          </form>    
+      </div>
+    </div>
