@@ -1,0 +1,30 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner"> 
+  <span class="task-left">Angular Task</span> 
+  <div class="spacer"></div>
+  <span class="task"><a (click)="logout()">Logout</a></span>
+</div>
+<div class="content" role="main">
+    <h2>List Of Enrollees</h2>
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date Of Birth</th>
+            <th scope="col">Activation Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let list of enrolleesList;let i=index;">
+            <th scope="row">{{list.id}}</th>
+            <td>{{list.name}}</td>
+            <td>{{list.dateOfBirth}}</td>
+            <td>{{list.active}}</td>
+            <td><a [routerLink]="['/editEnrollee', list.id]">Edit</a></td>
+          </tr>          
+        </tbody>
+      </table>
+      <div class="loader" *ngIf="loadData"></div>
+</div>
